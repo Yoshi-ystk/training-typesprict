@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Emoji Counter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React + TypeScript を使用した絵文字カウンターアプリケーションです。
+React の基本的な概念（useState、コンポーネント設計、TypeScript）を学習するためのプロジェクトです。
 
-## Available Scripts
+## 機能
 
-In the project directory, you can run:
+- **絵文字の切り替え**: クリックするたびに異なる絵文字が表示されます
+- **手動カウント**: ボタンクリックでカウントを増加できます
+- **リセット機能**: カウンターを 0 に戻すことができます
+- **デバッグ表示**: 配列のインデックス計算を確認できます
 
-### `npm start`
+## 技術スタック
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React 19.2.0** - UI ライブラリ
+- **TypeScript** - 型安全な JavaScript
+- **React Hooks** - useState
+- **CSS3** - スタイリング
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## プロジェクト構造
 
-### `npm test`
+```
+src/
+├── index.tsx              # アプリケーションのエントリーポイント
+├── CounterExample.tsx     # メインコンポーネント（状態管理・ロジック）
+├── EmojiDisplay.tsx       # 絵文字表示専用コンポーネント
+├── CounterButton.tsx      # ボタン専用コンポーネント
+└── CounterExample.css     # スタイルシート
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 学習ポイント
 
-### `npm run build`
+### 1. **useState フック**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```typescript
+const [count, setCount] = useState<number>(0);
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- コンポーネント内での状態管理
+- TypeScript での型指定
+- 状態更新時の関数形式の使用
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```typescript
+const handleIncrement = () => {
+  setCount((prevCount) => prevCount + 1);
+};
+```
 
-### `npm run eject`
+### 2. **コンポーネント設計**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **関心の分離**: 各コンポーネントが単一の責任を持つ
+- **Props**: 親から子へのデータ渡し
+- **再利用性**: 汎用的なコンポーネントの作成
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3. **TypeScript 活用**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```typescript
+// Props型定義
+interface EmojiDisplayProps {
+  currentEmoji: string;
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+interface CounterButtonProps {
+  onClick: () => void;
+  title: string;
+}
+```
 
-## Learn More
+- 型安全性の確保
+- インターフェース定義
+- 型推論の活用
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. **配列操作とモジュロ演算**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```typescript
+const currentEmoji: string = emojis[count % emojis.length];
+```
 
-### Code Splitting
+- 配列の循環アクセス
+- モジュロ演算（%）の活用
+- デバッグ表示での計算確認
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## コード解説
 
-### Analyzing the Bundle Size
+### 状態管理の流れ
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. `count`状態が変更される
+2. `currentEmoji`が再計算される
+3. コンポーネントが再レンダリングされる
+4. UI が自動更新される
 
-### Making a Progressive Web App
+### コンポーネントの責任分離
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **CounterExample**: 状態管理、ロジック、イベントハンドラー
+- **EmojiDisplay**: 絵文字表示のみ（Props で受け取った絵文字を表示）
+- **CounterButton**: ボタン表示とクリック処理のみ（Props で受け取った関数を実行）
 
-### Advanced Configuration
+### モジュロ演算の仕組み
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```typescript
+// 例：emojis配列が10個の場合
+count = 0  → 0 % 10 = 0  → emojis[0] = "😀"
+count = 5  → 5 % 10 = 5  → emojis[5] = "😅"
+count = 10 → 10 % 10 = 0 → emojis[0] = "😀" (循環)
+count = 15 → 15 % 10 = 5 → emojis[5] = "😅" (循環)
+```
