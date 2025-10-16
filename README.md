@@ -1,106 +1,63 @@
-# Emoji Counter
+# training-typescript
 
-React + TypeScript を使用した絵文字カウンターアプリケーションです。
-React の基本的な概念（useState、コンポーネント設計、TypeScript）を学習するためのプロジェクトです。
+このリポジトリは、TypeScript とモダンな React Hooks 開発のスキルを習得するために作成した**学習記録用モノリポジトリ**です。
 
-## 機能
+実践的な課題を通じて、TypeScript の型定義、React Hooks（`useState`, `useEffect`）、コンポーネント設計を段階的に習得し、その過程を記録しています。
 
-- **絵文字の切り替え**: クリックするたびに異なる絵文字が表示されます
-- **手動カウント**: ボタンクリックでカウントを増加できます
-- **リセット機能**: カウンターを 0 に戻すことができます
-- **デバッグ表示**: 配列のインデックス計算を確認できます
+---
 
-## 技術スタック
+## プロジェクト一覧 (学習進捗)
 
-- **React 19.2.0** - UI ライブラリ
-- **TypeScript** - 型安全な JavaScript
-- **React Hooks** - useState
-- **CSS3** - スタイリング
+現在、以下のプロジェクトが格納されています。今後、学習の進捗に合わせてプロジェクトを追加していきます。
 
-## プロジェクト構造
+### 1. **`01_react_hooks_counter`**
 
-```
-src/
-├── index.tsx              # アプリケーションのエントリーポイント
-├── CounterExample.tsx     # メインコンポーネント（状態管理・ロジック）
-├── EmojiDisplay.tsx       # 絵文字表示専用コンポーネント
-├── CounterButton.tsx      # ボタン専用コンポーネント
-└── CounterExample.css     # スタイルシート
-```
+- **テーマ**: React Hooks と TypeScript の基礎
+- **主な学習内容**: `useState`による状態管理、`interface`を用いた Props の型定義、コンポーネントの分割、`useEffect`の基本。
+- **状態**: ✅ 完了
 
-## 学習ポイント
+---
 
-### 1. **useState フック**
+## 🛠️ 技術スタック
 
-```typescript
-const [count, setCount] = useState<number>(0);
-```
+- **言語**: TypeScript (TSX)
+- **ライブラリ**: React / React Hooks
+- **環境**: Node.js, Webpack (CRA 環境), npm
+- **管理**: Git / GitHub Flow（ブランチ運用）
 
-- コンポーネント内での状態管理
-- TypeScript での型指定
-- 状態更新時の関数形式の使用
+---
 
-```typescript
-const handleIncrement = () => {
-  setCount((prevCount) => prevCount + 1);
-};
-```
+## 🚀 実行方法
 
-### 2. **コンポーネント設計**
+このリポジトリ内の任意のプロジェクトをローカルで実行するための共通手順です。
 
-- **関心の分離**: 各コンポーネントが単一の責任を持つ
-- **Props**: 親から子へのデータ渡し
-- **再利用性**: 汎用的なコンポーネントの作成
+1.  **リポジトリのクローン**
 
-### 3. **TypeScript 活用**
+    ```bash
+    git clone https://github.com/Yoshi-ystk/training-typesprict.git
+    cd traning-typescript
+    ```
 
-```typescript
-// Props型定義
-interface EmojiDisplayProps {
-  currentEmoji: string;
-}
+2.  **実行したいプロジェクトディレクトリへ移動**
 
-interface CounterButtonProps {
-  onClick: () => void;
-  title: string;
-}
-```
+    作業したいプロジェクトのフォルダに移動します。
 
-- 型安全性の確保
-- インターフェース定義
-- 型推論の活用
+    ```bash
+    cd 01_react_hooks_counter
+    ```
 
-### 4. **配列操作とモジュロ演算**
+3.  **依存関係のインストール**
 
-```typescript
-const currentEmoji: string = emojis[count % emojis.length];
-```
+    プロジェクトに必要なすべてのパッケージをインストールします。
 
-- 配列の循環アクセス
-- モジュロ演算（%）の活用
-- デバッグ表示での計算確認
+    ```bash
+    npm install
+    ```
 
-## コード解説
+4.  **アプリケーションの起動**
 
-### 状態管理の流れ
+    開発サーバーを起動します。
 
-1. `count`状態が変更される
-2. `currentEmoji`が再計算される
-3. コンポーネントが再レンダリングされる
-4. UI が自動更新される
-
-### コンポーネントの責任分離
-
-- **CounterExample**: 状態管理、ロジック、イベントハンドラー
-- **EmojiDisplay**: 絵文字表示のみ（Props で受け取った絵文字を表示）
-- **CounterButton**: ボタン表示とクリック処理のみ（Props で受け取った関数を実行）
-
-### モジュロ演算の仕組み
-
-```typescript
-// 例：emojis配列が10個の場合
-count = 0  → 0 % 10 = 0  → emojis[0] = "😀"
-count = 5  → 5 % 10 = 5  → emojis[5] = "😅"
-count = 10 → 10 % 10 = 0 → emojis[0] = "😀" (循環)
-count = 15 → 15 % 10 = 5 → emojis[5] = "😅" (循環)
-```
+    ```bash
+    npm start
+    ```

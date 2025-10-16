@@ -1,29 +1,36 @@
-# dependencies
-/node_modules
-/.pnp
+# -----------------------------------
+# 1. 依存関係とビルド成果物
+# -----------------------------------
+
+*/node_modules
+
+*/build
+*/dist
+*/coverage
+.pnp
 .pnp.js
 
-# testing
-/coverage
+# -----------------------------------
+# 2. ログと環境情報 (機密情報)
+# -----------------------------------
 
-# production
-/build
-
-# misc
-.DS_Store
+.env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*.local
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Cursor
-/.cursor/
+# -----------------------------------
+# 3. エディタ/OS固有の一時ファイル
+# -----------------------------------
+
+.DS_Store
+
+*.tsbuildinfo
+
+.vscode/
+.cursor/
 .cursor-history
 .cursor-logs
-
-# VSCode
-/.vscode
